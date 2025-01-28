@@ -1,11 +1,17 @@
 const endpointsJson = require("../endpoints.json");
 const request = require("supertest");
-const express = require("express");
 const db = require("../db/connection");
 const app = require("../app");
-/* Set up your test imports here */
+const seed = require("../db/seeds/seed");
+const testData = require("../db/data/test-data/index");
 
-/* Set up your beforeEach & afterAll functions here */
+beforeEach(() => {
+  return seed(testData);
+});
+
+afterAll(() => {
+  return db.end();
+});
 
 describe("GET /api", () => {
   test("200: Responds with an object detailing the documentation for each endpoint", () => {
@@ -21,38 +27,50 @@ describe("GET /api", () => {
       .get("/apv")
       .expect(404)
       .then((response) => {
-        console.log(response.body);
-        expect(response.body.error).toBe("Endpoint not found");
+        expect(response.body.error).toBe("Not found");
       });
   });
 });
 describe("GET /api/topics", () => {
-  test("200: Responds with an obejct detailing all the topics on the endpoint /api/topics", () => {
+  test("200: Responds with an object detailing all the topics on the endpoint /api/topics", () => {
     return request(app)
       .get("/api/topics")
       .expect(200)
       .then((response) => {
-        console.log(response.body);
-        expect(response.body).toEqual(
-          endpointsJson["GET /api/topics"].exampleResponse.topics
-        );
+        console.log(response.body.length);
+        expect(response.body.length).toBe(3);
+        response.body.forEach((topic) => {
+          expect(topic).toMatchObject({
+            description: expect.any(String),
+            slug: expect.any(String),
+          });
+        });
       });
   });
-  test("404: Responds with a message if the cilent gives an ID which does not exist in the database", () => {
+  test("404: Responds with a message if the cilent gives an incorrect pathway which does not exist", () => {
     return request(app)
       .get("/api/tipics")
       .expect(404)
       .then((response) => {
-        expect(response.body.error).toBe("Endpoint not found");
+        expect(response.body.error).toBe("Not found");
       });
   });
 });
-
-//BELOW is setup for a 400 status code
-// test("400: Responds with 'Bad Request' if the client gives an non numberd category ID", () => {
-//   return request(app)
-//     .get("/api/topics/?cheesecake")
-//     .expect(400)
-//     .then((response) => {
-//       expect(response.body.error).toBe("Bad Request");
-//     });
+describe("GET /api/articles/:article_id", () => {
+  test("200: Responds with if the article positioned at the given article_id", () => {
+    return request(app)
+      .get("/api/articles/2")
+      .expect(200)
+      .then((response) => {
+        expect(response.body).toMatchObject({
+          title: expect.any(String),
+          topic: expect.any(String),
+          author: expect.any(String),
+          body: expect.any(String),
+          created_at: expect.any(String),
+          votes: expect.any(Number),
+          article_img_url: expect.any(String),
+        });
+      });
+  });
+});
