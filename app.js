@@ -13,8 +13,15 @@ app.get("/api/topics", getTopics);
 
 app.get("/api/articles/:article_id", getArticleByID);
 
+app.use((err, req, res, next) => {
+  if (err.code === "22P02") {
+    res.status(400).send({ err: "Bad Request" });
+  }
+  res.status(err.status).send(err);
+});
+
 app.all("*", (req, res) => {
-  res.status(404).send({ error: "Not found" });
+  res.status(404).send({ err: "Not found" });
 });
 
 module.exports = app;
