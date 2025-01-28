@@ -16,4 +16,43 @@ describe("GET /api", () => {
         expect(endpoints).toEqual(endpointsJson);
       });
   });
+  test("404: Responds with a message if client give invalid pathway", () => {
+    return request(app)
+      .get("/apv")
+      .expect(404)
+      .then((response) => {
+        console.log(response.body);
+        expect(response.body.error).toBe("Endpoint not found");
+      });
+  });
 });
+describe("GET /api/topics", () => {
+  test("200: Responds with an obejct detailing all the topics on the endpoint /api/topics", () => {
+    return request(app)
+      .get("/api/topics")
+      .expect(200)
+      .then((response) => {
+        console.log(response.body);
+        expect(response.body).toEqual(
+          endpointsJson["GET /api/topics"].exampleResponse.topics
+        );
+      });
+  });
+  test("404: Responds with a message if the cilent gives an ID which does not exist in the database", () => {
+    return request(app)
+      .get("/api/tipics")
+      .expect(404)
+      .then((response) => {
+        expect(response.body.error).toBe("Endpoint not found");
+      });
+  });
+});
+
+//BELOW is setup for a 400 status code
+// test("400: Responds with 'Bad Request' if the client gives an non numberd category ID", () => {
+//   return request(app)
+//     .get("/api/topics/?cheesecake")
+//     .expect(400)
+//     .then((response) => {
+//       expect(response.body.error).toBe("Bad Request");
+//     });
