@@ -35,7 +35,10 @@ exports.fetchAllArticles = () => {
 exports.fetchCommentsByArticleID = (id) => {
   const idNum = id.article_id;
   return db
-    .query(`SELECT * FROM comments WHERE article_id = $1`, [idNum])
+    .query(
+      `SELECT * FROM comments WHERE article_id = $1 ORDER BY comments.created_at DESC`,
+      [idNum]
+    )
     .then((result) => {
       console.log(result.rows);
       return result.rows;

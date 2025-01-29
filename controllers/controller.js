@@ -50,13 +50,14 @@ exports.getCommentByArticleID = (req, res, next) => {
     .then((commentsToSend) => {
       if (commentsToSend.length === 0) {
         return Promise.reject({
-          status: 200,
+          status: 404,
           err: "No comments have been posted",
         });
       }
       res.status(200).send(commentsToSend[0]);
     })
     .catch((err) => {
+      console.log(err);
       next(err);
     });
 };

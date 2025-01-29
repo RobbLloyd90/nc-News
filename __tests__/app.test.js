@@ -22,7 +22,7 @@ describe("GET /api", () => {
         expect(endpoints).toEqual(endpointsJson);
       });
   });
-  test("404: for all bad urls Responds with a message if client gives a pathway that doesn't exist", () => {
+  test("404: for all bad urls Responds with a message if client gives an endpoint that doesn't exist", () => {
     return request(app)
       .get("/apv")
       .expect(404)
@@ -105,7 +105,7 @@ describe("GET /api/articles", () => {
 describe("Get /api/articles/:articles_id/comments", () => {
   test("200: Responses with all the comments from the request article", () => {
     return request(app)
-      .get("/api/articles/9/comments")
+      .get("/api/articles/1/comments")
       .expect(200)
       .then((response) => {
         expect(response.body).toMatchObject({
@@ -118,12 +118,11 @@ describe("Get /api/articles/:articles_id/comments", () => {
         });
       });
   });
-  test("200, but no posted comments: If an article has no comments, return 'No comments have been posted'", () => {
+  test("404, If an article has no comments, return 'No comments have been posted'", () => {
     return request(app)
-      .get("/api/articles/2/comments")
-      .expect(200)
+      .get("/api/articles/222/comments")
+      .expect(404)
       .then((response) => {
-        console.log(response.body);
         expect(response.body.err).toEqual("No comments have been posted");
       });
   });

@@ -38,5 +38,17 @@
       "votes": 2,
       "comment_count": 47
     }
+  },
+  "GET /api/artticles/:article_id": {
+    "description": "serves comments in most recent comments first from an article ",
+    "queries": [],
+    "exampleResponse": {
+      "commet_id": 9,
+      "votes": 1,
+      "created_at": "2024-11-02T10:05:42.341Z",
+      "author": "GrandmaRagu",
+      "body": "My grandchildern will love having their ragu on this new pasta shape",
+      "article_id": 2
+    }
   }
 }

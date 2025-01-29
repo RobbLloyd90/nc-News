@@ -16,13 +16,6 @@ app.get("/api/articles/:article_id", getArticleByID);
 
 app.get("/api/articles", getAllArticles);
 
-app.use((err, req, res, next) => {
-  if (err.code === "22P02") {
-    res.status(400).send({ err: "Bad Request" });
-  }
-  res.status(err.status).send(err);
-});
-
 app.get("/api/articles/:article_id/comments", getCommentByArticleID);
 
 app.use((err, req, res, next) => {
