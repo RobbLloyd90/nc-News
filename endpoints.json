@@ -25,5 +25,18 @@
         }
       ]
     }
+  },
+  "GET /api/articles/:article_id": {
+    "description": "serves an article from a given id number",
+    "queries": [],
+    "exampleResponse": {
+      "title": "Which pasta type should I use",
+      "topic": "cooking",
+      "author": "pastaMaster",
+      "body": "Text from the article..",
+      "created_at": "2024-10-30T16:20:40.341Z",
+      "votes": 2,
+      "comment_count": 47
+    }
   }
 }

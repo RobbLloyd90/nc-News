@@ -1,16 +1,14 @@
 const { fetchAllTopics, fetchArticleByID } = require("../models/model");
 const endpoints = require("../endpoints.json");
-//const regexIDNumsCheck = /\d+s/;
 
 exports.getApi = (req, res, next) => {
-  console.log(res.body);
   res.status(200).send({ endpoints });
 };
 
 exports.getTopics = (req, res, next) => {
   fetchAllTopics()
     .then((allTopics) => {
-      res.send(allTopics);
+      res.status(200).send(allTopics);
     })
     .catch((err) => {
       next(err);
@@ -18,16 +16,16 @@ exports.getTopics = (req, res, next) => {
 };
 
 exports.getArticleByID = (req, res, next) => {
-  //console.log(req.params);
   const articleId = req.params;
   fetchArticleByID(articleId)
     .then((articleToSend) => {
-      res.status(200).send(articleToSend);
+      if (articleToSend.length === 0) {
+        return Promise.reject({ status: 404, err: "Article not found" });
+      }
+      res.status(200).send(articleToSend[0]);
     })
-    .catch(next);
+    .catch((err) => {
+      console.log(err.code);
+      next(err);
+    });
 };
-//BELOW is code when trying to write for 400 status code. Might be useful later
-// console.log(regexIDNumsCheck.test(req.query));
-
-// if (regexIDNumsCheck.test(req.query) === false) {
-// next();

@@ -14,6 +14,6 @@ exports.fetchArticleByID = (id) => {
   return db
     .query(`SELECT * FROM articles WHERE article_id = $1`, [idNum])
     .then((result) => {
-      return result.rows[0];
+      return result.rows;
     });
 };

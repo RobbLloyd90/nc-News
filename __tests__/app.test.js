@@ -22,12 +22,12 @@ describe("GET /api", () => {
         expect(endpoints).toEqual(endpointsJson);
       });
   });
-  test("404: Responds with a message if client give invalid pathway", () => {
+  test("404: for all bad urls Responds with a message if client gives a pathway that doesn't exist", () => {
     return request(app)
       .get("/apv")
       .expect(404)
       .then((response) => {
-        expect(response.body.error).toBe("Not found");
+        expect(response.body.err).toBe("Not found");
       });
   });
 });
@@ -37,7 +37,6 @@ describe("GET /api/topics", () => {
       .get("/api/topics")
       .expect(200)
       .then((response) => {
-        console.log(response.body.length);
         expect(response.body.length).toBe(3);
         response.body.forEach((topic) => {
           expect(topic).toMatchObject({
@@ -45,14 +44,6 @@ describe("GET /api/topics", () => {
             slug: expect.any(String),
           });
         });
-      });
-  });
-  test("404: Responds with a message if the cilent gives an incorrect pathway which does not exist", () => {
-    return request(app)
-      .get("/api/tipics")
-      .expect(404)
-      .then((response) => {
-        expect(response.body.error).toBe("Not found");
       });
   });
 });
@@ -71,6 +62,22 @@ describe("GET /api/articles/:article_id", () => {
           votes: expect.any(Number),
           article_img_url: expect.any(String),
         });
+      });
+  });
+  test("404: Responds with a message if the cilent give an id numebr does not content any data", () => {
+    return request(app)
+      .get("/api/articles/77")
+      .expect(404)
+      .then((response) => {
+        expect(response.body.err).toEqual("Article not found");
+      });
+  });
+  test("400: Responds with a message bad request when the user doesn't provide a correct id", () => {
+    return request(app)
+      .get("/api/articles/id")
+      .expect(400)
+      .then((response) => {
+        expect(response.body.err).toEqual("Bad Request");
       });
   });
 });
