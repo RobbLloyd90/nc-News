@@ -1,4 +1,9 @@
-const { fetchAllTopics, fetchArticleByID } = require("../models/model");
+const {
+  fetchAllTopics,
+  fetchArticleByID,
+  fetchAllArticles,
+  fetchCommentsByArticleID,
+} = require("../models/model");
 const endpoints = require("../endpoints.json");
 
 exports.getApi = (req, res, next) => {
@@ -25,7 +30,33 @@ exports.getArticleByID = (req, res, next) => {
       res.status(200).send(articleToSend[0]);
     })
     .catch((err) => {
-      console.log(err.code);
+      next(err);
+    });
+};
+
+exports.getAllArticles = (req, res, next) => {
+  fetchAllArticles()
+    .then((allArticles) => {
+      res.status(200).send(allArticles);
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
+
+exports.getCommentByArticleID = (req, res, next) => {
+  const articleId = req.params;
+  fetchCommentsByArticleID(articleId)
+    .then((commentsToSend) => {
+      if (commentsToSend.length === 0) {
+        return Promise.reject({
+          status: 200,
+          err: "No comments have been posted",
+        });
+      }
+      res.status(200).send(commentsToSend[0]);
+    })
+    .catch((err) => {
       next(err);
     });
 };

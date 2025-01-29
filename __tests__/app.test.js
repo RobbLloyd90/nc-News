@@ -81,3 +81,50 @@ describe("GET /api/articles/:article_id", () => {
       });
   });
 });
+describe("GET /api/articles", () => {
+  test("200: respones with an array of articles descending based on time of creation. Does not include body property", () => {
+    return request(app)
+      .get("/api/articles")
+      .expect(200)
+      .then((response) => {
+        expect(response.body.length).toBe(13);
+        response.body.forEach((article) => {
+          expect(article).toMatchObject({
+            title: expect.any(String),
+            topic: expect.any(String),
+            author: expect.any(String),
+            created_at: expect.any(String),
+            votes: expect.any(Number),
+            article_img_url: expect.any(String),
+            comment_count: expect.any(String),
+          });
+        });
+      });
+  });
+});
+describe("Get /api/articles/:articles_id/comments", () => {
+  test("200: Responses with all the comments from the request article", () => {
+    return request(app)
+      .get("/api/articles/9/comments")
+      .expect(200)
+      .then((response) => {
+        expect(response.body).toMatchObject({
+          comment_id: expect.any(Number),
+          votes: expect.any(Number),
+          created_at: expect.any(String),
+          author: expect.any(String),
+          body: expect.any(String),
+          article_id: expect.any(Number),
+        });
+      });
+  });
+  test("200, but no posted comments: If an article has no comments, return 'No comments have been posted'", () => {
+    return request(app)
+      .get("/api/articles/2/comments")
+      .expect(200)
+      .then((response) => {
+        console.log(response.body);
+        expect(response.body.err).toEqual("No comments have been posted");
+      });
+  });
+});
