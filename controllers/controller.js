@@ -72,3 +72,14 @@ exports.postCommentOnArticle = (req, res, next) => {
     res.status(201).send(commentPosted[0]);
   });
 };
+
+exports.postCommentOnArticle = (req, res, next) => {
+  const newComment = req.body;
+  const articleId = req.params;
+  fetchPostCommentOnArticle(newComment, articleId).then((commentPosted) => {
+    if (commentPosted.code === "23503" || commentPosted.status === 400) {
+      next(commentPosted);
+    }
+    res.status(201).send(commentPosted[0]);
+  });
+};

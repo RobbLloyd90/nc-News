@@ -199,3 +199,32 @@ describe("POST REQUESTS", () => {
     });
   });
 });
+describe("GET /api/articles", () => {
+  test("200: respones with an array of articles descending based on time of creation. Does not include body property", () => {
+    return request(app)
+      .get("/api/articles")
+      .expect(200)
+      .then((response) => {
+        expect(response.body.length).toBe(13);
+        response.body.forEach((article) => {
+          expect(article).toMatchObject({
+            title: expect.any(String),
+            topic: expect.any(String),
+            author: expect.any(String),
+            created_at: expect.any(String),
+            votes: expect.any(Number),
+            article_img_url: expect.any(String),
+            comment_count: expect.any(String),
+          });
+        });
+      });
+  });
+});
+describe("Get /api/articles/:articles_id/comments", () => {
+  test("200:", () => {
+    return request(app)
+      .get("/api/articles")
+      .expect(200)
+      .then((response) => {});
+  });
+});
