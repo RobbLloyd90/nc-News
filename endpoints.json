@@ -62,5 +62,18 @@
       "body": "Should add more salt to the pan",
       "article_id": 2
     }
+  },
+  "PATCH /api/articles/:article_id": {
+    "description": "Updates the vote count on an article, can be increased and decreased ",
+    "queries": [],
+    "exampleResponse": {
+      "article_id": 1,
+      "votes": 11
+    }
+  },
+  "DELETE /api/comments/:comment_id": {
+    "description": "Deletes spefic comment from the database",
+    "queries": [],
+    "exampleResponse": {}
   }
 }

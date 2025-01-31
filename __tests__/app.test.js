@@ -12,7 +12,7 @@ beforeEach(() => {
 afterAll(() => {
   return db.end();
 });
-describe("GET REQUESTS", () => {
+describe("APP.GET / GET REQUESTS", () => {
   describe("GET avaibale API endpoints", () => {
     test("200: Responds with an object detailing the documentation for each endpoint", () => {
       return request(app)
@@ -150,8 +150,8 @@ describe("GET REQUESTS", () => {
     });
   });
 });
-describe("POST REQUESTS", () => {
-  describe("Post comments on articles", () => {
+describe("APP.POST", () => {
+  describe("POST REQUEST", () => {
     test("201: Returns a new posted comment", () => {
       const newComment = {
         author: "al-dente",
@@ -227,9 +227,7 @@ describe("POST REQUESTS", () => {
         });
     });
   });
-});
-describe("PATCH REQUESTS", () => {
-  describe("Update article by article_id", () => {
+  describe("PATCH REQUESTS", () => {
     test("203: Increase the vote count by 1 when one is passed", () => {
       const article = {
         title: "Living in the shadow of a great man",
@@ -307,5 +305,27 @@ describe("PATCH REQUESTS", () => {
           expect(respones.body.err).toEqual("Bad Request");
         });
     });
+  });
+});
+describe("APP.DELETE / DELETE REQUESTS", () => {
+  test("204: Deletes a comment from the databased from its comment_id", () => {
+    return request(app).delete("/api/comments/4").expect(204);
+  });
+
+  test("400: Returns 'Bad Request' if comment_id is invalid, Not a number", () => {
+    return request(app)
+      .delete("/api/comments/101 sauaces for your pasta")
+      .expect(400)
+      .then((response) => {
+        expect(response.body.err).toEqual("Bad Request");
+      });
+  });
+  test("404: Returns 'Not Found' if the comment_id doesn't exist on the database", () => {
+    return request(app)
+      .delete("/api/comments/101")
+      .expect(404)
+      .then((response) => {
+        expect(response.body.err).toEqual("Not Found");
+      });
   });
 });
