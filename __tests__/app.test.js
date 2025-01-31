@@ -230,7 +230,7 @@ describe("POST REQUESTS", () => {
 });
 describe("PATCH REQUESTS", () => {
   describe("Update article by article_id", () => {
-    test.only("203: Increase the vote count by 1 when one is passed", () => {
+    test("203: Increase the vote count by 1 when one is passed", () => {
       const article = {
         title: "Living in the shadow of a great man",
         topic: "mitch",
