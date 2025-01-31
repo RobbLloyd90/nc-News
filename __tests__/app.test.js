@@ -13,7 +13,7 @@ afterAll(() => {
   return db.end();
 });
 describe("GET REQUESTS", () => {
-  describe("GET /api", () => {
+  describe("GET avaibale API endpoints", () => {
     test("200: Responds with an object detailing the documentation for each endpoint", () => {
       return request(app)
         .get("/api")
@@ -22,7 +22,7 @@ describe("GET REQUESTS", () => {
           expect(endpoints).toEqual(endpointsJson);
         });
     });
-    test("404: for all bad urls Responds with a message if client gives an endpoint that doesn't exist", () => {
+    test("404: Responds with a message for all bad URLs", () => {
       return request(app)
         .get("/apv")
         .expect(404)
@@ -64,7 +64,7 @@ describe("GET REQUESTS", () => {
           });
         });
     });
-    test("404: Responds with a message if the cilent give an id numebr does not content any data", () => {
+    test("404: Responds with 'Article not found' if the cilent give an id numebr does not content any data", () => {
       return request(app)
         .get("/api/articles/77")
         .expect(404)
@@ -72,7 +72,7 @@ describe("GET REQUESTS", () => {
           expect(response.body.err).toEqual("Article not found");
         });
     });
-    test("400: Responds with a message bad request when the user doesn't provide a correct id", () => {
+    test("400: Responds with 'Bad Request' when the user doesn't provide a correct id", () => {
       return request(app)
         .get("/api/articles/id")
         .expect(400)
@@ -82,7 +82,7 @@ describe("GET REQUESTS", () => {
     });
   });
   describe("GET /api/articles", () => {
-    test("200: respones with an array of articles descending based on time of creation. Does not include body property", () => {
+    test("200: Respones with an array of articles descending based on time of creation. Does not include body property", () => {
       return request(app)
         .get("/api/articles")
         .expect(200)
@@ -132,7 +132,7 @@ describe("GET REQUESTS", () => {
           });
         });
     });
-    test("200: If an article has no comments, return 'No comments have been posted'", () => {
+    test("200: Responds with 'No comments have been posted' if an article has no comments", () => {
       return request(app)
         .get("/api/articles/2/comments")
         .expect(404)
@@ -140,7 +140,7 @@ describe("GET REQUESTS", () => {
           expect(response.body.err).toEqual("No comments have been posted");
         });
     });
-    test("400: Responds with bad request when user give an invalid id", () => {
+    test("400: Responds with 'Bad Request' when user give an invalid id", () => {
       return request(app)
         .get("/api/articles/id/comments")
         .expect(400)
@@ -151,7 +151,7 @@ describe("GET REQUESTS", () => {
   });
 });
 describe("POST REQUESTS", () => {
-  describe("Post /api", () => {
+  describe("Post comments on articles", () => {
     test("201: Returns a new posted comment", () => {
       const newComment = {
         author: "al-dente",
@@ -167,7 +167,7 @@ describe("POST REQUESTS", () => {
           expect(respones.body.body).toBe("This article feels half done");
         });
     });
-    test("400: Returns a Bad Request if no user exists in the user database", () => {
+    test("404: Returns a 'Not Found' if no user exists in the user database", () => {
       const newComment = {
         author: "Caabi Nara",
         body: "In Japan Spagehtti is the fourth type of noodle",
@@ -177,18 +177,17 @@ describe("POST REQUESTS", () => {
       return request(app)
         .post("/api/articles/1/comments")
         .send(newComment)
-        .expect(400)
+        .expect(404)
         .then((response) => {
-          expect(response.body.err).toEqual("Bad Request");
+          expect(response.body.err).toEqual("Not Found");
         });
     });
-    test("400: Returns a Bad Request when the user tries to post without writing a body", () => {
+    test("400: Returns a 'Bad Request' when the user sends an empty object", () => {
       const newComment = {
         author: "al-dente",
-        body: "",
+        body: [],
         votes: 0,
       };
-
       return request(app)
         .post("/api/articles/1/comments")
         .send(newComment)
@@ -197,34 +196,116 @@ describe("POST REQUESTS", () => {
           expect(response.body.err).toEqual("Cannot post an empty body");
         });
     });
-  });
-});
-describe("GET /api/articles", () => {
-  test("200: respones with an array of articles descending based on time of creation. Does not include body property", () => {
-    return request(app)
-      .get("/api/articles")
-      .expect(200)
-      .then((response) => {
-        expect(response.body.length).toBe(13);
-        response.body.forEach((article) => {
-          expect(article).toMatchObject({
-            title: expect.any(String),
-            topic: expect.any(String),
-            author: expect.any(String),
-            created_at: expect.any(String),
-            votes: expect.any(Number),
-            article_img_url: expect.any(String),
-            comment_count: expect.any(String),
-          });
+    test("404: Returns 'Not Found' if the article doesn't exist", () => {
+      const newComment = {
+        author: "al-dente",
+        body: "This article feels half done",
+        votes: 0,
+      };
+
+      return request(app)
+        .post("/api/articles/53/comments")
+        .send(newComment)
+        .expect(404)
+        .then((respones) => {
+          expect(respones.body.err).toEqual("Not Found");
         });
-      });
+    });
+    test("400: Returns 'Bad Request' if the id is invalid, Not a number", () => {
+      const newComment = {
+        author: "al-dente",
+        body: "This article feels half done",
+        votes: 0,
+      };
+
+      return request(app)
+        .post("/api/articles/pastaMaster/comments")
+        .send(newComment)
+        .expect(400)
+        .then((respones) => {
+          expect(respones.body.err).toEqual("Bad Request");
+        });
+    });
   });
 });
-describe("Get /api/articles/:articles_id/comments", () => {
-  test("200:", () => {
-    return request(app)
-      .get("/api/articles")
-      .expect(200)
-      .then((response) => {});
+describe("PATCH REQUESTS", () => {
+  describe("Update article by article_id", () => {
+    test.only("203: Increase the vote count by 1 when one is passed", () => {
+      const article = {
+        title: "Living in the shadow of a great man",
+        topic: "mitch",
+        author: "butter_bridge",
+        body: "I find this existence challenging",
+        created_at: 1594329060000,
+        votes: 100,
+        article_img_url:
+          "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
+      };
+
+      const voteUpdate = { votes: 1 };
+
+      return request(app)
+        .post("/api/articles/1")
+        .send(voteUpdate)
+        .expect(203)
+        .then((respones) => {
+          expect(respones.body[0].votes).toBe(101);
+          expect(respones.body[0].article_id).toBe(1);
+        });
+    });
+    test("203: Decrease the vote count by 1 when one is passed", () => {
+      const article = {
+        title: "Living in the shadow of a great man",
+        topic: "mitch",
+        author: "butter_bridge",
+        body: "I find this existence challenging",
+        created_at: 1594329060000,
+        votes: 100,
+        article_img_url:
+          "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
+      };
+
+      const voteUpdate = { votes: -50 };
+
+      return request(app)
+        .post("/api/articles/1")
+        .send(voteUpdate)
+        .expect(203)
+        .then((respones) => {
+          expect(respones.body[0].votes).toBe(50);
+          expect(respones.body[0].article_id).toBe(1);
+        });
+    });
+    test("400: Returns 'Bad Request' if the vote isn't a number", () => {
+      const voteUpdate = { votes: "notValid" };
+      return request(app)
+        .post("/api/articles/99")
+        .send(voteUpdate)
+        .expect(400)
+        .then((respones) => {
+          expect(respones.body.err).toBe("Bad Request");
+        });
+    });
+    test("404: Returns 'Not Found' if the article doesn't exist", () => {
+      const voteUpdate = { votes: 1 };
+      return request(app)
+        .post("/api/articles/99")
+        .send(voteUpdate)
+        .expect(404)
+        .then((respones) => {
+          expect(respones.body.err).toEqual("Not Found");
+        });
+    });
+    test("400: Returns 'Bad Request' if the ID is invalid, Not a number", () => {
+      const voteUpdate = { votes: 1 };
+
+      return request(app)
+        .post("/api/articles/bowTiesVsPenne")
+        .send(voteUpdate)
+        .expect(400)
+        .then((respones) => {
+          expect(respones.body.err).toEqual("Bad Request");
+        });
+    });
   });
 });
