@@ -5,8 +5,10 @@ const {
   fetchCommentsByArticleID,
   fetchPostCommentOnArticle,
   fetchVoteOnArticle,
+  fetchCommentToDelete,
 } = require("../models/model");
 const endpoints = require("../endpoints.json");
+const { rawListeners } = require("../app");
 
 exports.getApi = (req, res, next) => {
   res.status(200).send({ endpoints });
@@ -84,7 +86,6 @@ exports.voteOnArticle = (req, res, next) => {
   const articleId = req.params.article_id;
   fetchVoteOnArticle(newVote, articleId)
     .then((votesFetched) => {
-      console.log(votesFetched.code);
       if (votesFetched.code === "22P02") {
         next(votesFetched);
       }
@@ -92,6 +93,18 @@ exports.voteOnArticle = (req, res, next) => {
         next(votesFetched);
       }
       res.status(203).send(votesFetched);
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
+
+exports.deleteComment = (req, res, next) => {
+  fetchCommentToDelete(req.params)
+    .then((results) => {
+      if (results.status === 404) {
+        next(results);
+      } else res.status(204).send(results.rows);
     })
     .catch((err) => {
       next(err);

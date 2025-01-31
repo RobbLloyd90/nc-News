@@ -136,3 +136,48 @@ exports.fetchVoteOnArticle = (vote, articleId) => {
       return err;
     });
 };
+
+exports.fetchCommentToDelete = (id) => {
+  const commentID = id.comment_id;
+
+  const deleteCommentStr = format(
+    "DELETE FROM comments WHERE comment_id = $1 RETURNING *"
+  );
+  return db
+    .query(deleteCommentStr, [commentID])
+    .then(({ rows: commentRow }) => {
+      if (commentRow.length === 0) {
+        return Promise.reject({ status: 404, err: "Not Found" });
+      }
+      return commentRow;
+    })
+    .catch((err) => {
+      if (err.code === "22P02") {
+        return Promise.reject({ status: 400, err: "Bad Request" });
+      } else return err;
+    });
+};
+
+// exports.fetchCommentToDelete = (id) => {
+//   const commentID = id.comment_id;
+//   const selectCommentStr = format(
+//     "SELECT * FROM comments WHERE comment_id = $1"
+//   );
+//   db.query(selectCommentStr, [commentID])
+//     .then(({ rows: commentRows }) => {
+//       //console.log(commentRows);
+//       const deleteCommentStr = format(
+//         "DELETE FROM comments WHERE comment_id = $1 RETURNING *"
+//       );
+//       //console.log(deleteCommentStr, [commentID]);
+//       return db.query(deleteCommentStr, [commentID]);
+//     })
+//     .then((results) => {
+//       console.log(results.rows);
+//       return results.rows;
+//     })
+//     .catch((err) => {
+//       console.log(err.code);
+//       return err;
+//     });
+// };
