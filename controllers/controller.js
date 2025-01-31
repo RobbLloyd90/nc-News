@@ -4,6 +4,7 @@ const {
   fetchAllArticles,
   fetchCommentsByArticleID,
   fetchPostCommentOnArticle,
+  fetchVoteOnArticle,
 } = require("../models/model");
 const endpoints = require("../endpoints.json");
 
@@ -37,8 +38,8 @@ exports.getArticleByID = (req, res, next) => {
 
 exports.getAllArticles = (req, res, next) => {
   fetchAllArticles()
-    .then((allArticles) => {
-      res.status(200).send(allArticles);
+    .then((allArticlesFetched) => {
+      res.status(200).send(allArticlesFetched);
     })
     .catch((err) => {
       next(err);
@@ -48,14 +49,14 @@ exports.getAllArticles = (req, res, next) => {
 exports.getCommentByArticleID = (req, res, next) => {
   const articleId = req.params;
   fetchCommentsByArticleID(articleId)
-    .then((commentsToSend) => {
-      if (commentsToSend.length === 0) {
+    .then((allCommentsFetched) => {
+      if (allCommentsFetched.length === 0) {
         return Promise.reject({
           status: 404,
           err: "No comments have been posted",
         });
       }
-      res.status(200).send(commentsToSend);
+      res.status(200).send(allCommentsFetched);
     })
     .catch((err) => {
       next(err);
@@ -65,21 +66,34 @@ exports.getCommentByArticleID = (req, res, next) => {
 exports.postCommentOnArticle = (req, res, next) => {
   const newComment = req.body;
   const articleId = req.params;
-  fetchPostCommentOnArticle(newComment, articleId).then((commentPosted) => {
-    if (commentPosted.code === "23503" || commentPosted.status === 400) {
-      next(commentPosted);
+  fetchPostCommentOnArticle(newComment, articleId).then((newCommentFetched) => {
+    if (
+      newCommentFetched.code === "23503" ||
+      newCommentFetched.code === "22P02" ||
+      newCommentFetched.status === 404 ||
+      newCommentFetched.status === 400
+    ) {
+      next(newCommentFetched);
     }
-    res.status(201).send(commentPosted[0]);
+    res.status(201).send(newCommentFetched[0]);
   });
 };
 
-exports.postCommentOnArticle = (req, res, next) => {
-  const newComment = req.body;
-  const articleId = req.params;
-  fetchPostCommentOnArticle(newComment, articleId).then((commentPosted) => {
-    if (commentPosted.code === "23503" || commentPosted.status === 400) {
-      next(commentPosted);
-    }
-    res.status(201).send(commentPosted[0]);
-  });
+exports.voteOnArticle = (req, res, next) => {
+  const newVote = req.body;
+  const articleId = req.params.article_id;
+  fetchVoteOnArticle(newVote, articleId)
+    .then((votesFetched) => {
+      console.log(votesFetched.code);
+      if (votesFetched.code === "22P02") {
+        next(votesFetched);
+      }
+      if (votesFetched.status === 404) {
+        next(votesFetched);
+      }
+      res.status(203).send(votesFetched);
+    })
+    .catch((err) => {
+      next(err);
+    });
 };

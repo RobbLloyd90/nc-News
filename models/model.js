@@ -19,8 +19,8 @@ exports.fetchArticleByID = (id) => {
       WHERE article_id = $1`,
       [articleIDdNum]
     )
-    .then((result) => {
-      return result.rows;
+    .then(({ rows: articleRows }) => {
+      return articleRows;
     });
 };
 exports.fetchAllArticles = () => {
@@ -63,10 +63,22 @@ exports.fetchPostCommentOnArticle = (
   return db
     .query(articleSelectStr, [article_id])
     .then(({ rows: articleRows }) => {
+      if (articleRows.length === 0) {
+        return Promise.reject({
+          status: 404,
+          err: "Not Found",
+        });
+      }
       if ({ article_id: expect.any(Number) }) {
+        if (body.length === 0) {
+          return Promise.reject({
+            status: 400,
+            err: "Cannot post an empty body",
+          });
+        }
+
         const articleId = articleRows[0].article_id;
         const data = [body, author, votes, articleId];
-
         const commentInsertStr = format(
           "INSERT INTO comments (body, author, votes, article_id) VALUES (%L) RETURNING *;",
           data
@@ -75,18 +87,50 @@ exports.fetchPostCommentOnArticle = (
         return db
           .query(commentInsertStr)
           .then(({ rows: commentRows }) => {
-            if (commentRows[0].body.length > 0) {
-              return commentRows;
-            }
-            return Promise.reject({
-              status: 400,
-              err: "Cannot post an empty body",
-            });
+            return commentRows;
           })
           .catch((err) => {
-            return Promise.reject(err);
+            return Promise.reject({
+              status: 404,
+              err: "Not Found",
+            });
           });
       }
+    })
+    .catch((err) => {
+      return err;
+    });
+};
+
+exports.fetchVoteOnArticle = (vote, articleId) => {
+  if (typeof vote.votes !== "number") {
+    return Promise.reject({
+      status: 400,
+      err: "Bad Request",
+    });
+  }
+  const articleSelectStr = format(
+    `SELECT * FROM articles WHERE article_id = $1`
+  );
+  return db
+    .query(articleSelectStr, [articleId])
+    .then(({ rows: articleRows }) => {
+      if (articleRows.length === 0) {
+        return Promise.reject({
+          status: 404,
+          err: "Not Found",
+        });
+      }
+      const voteUpdateStr = format(
+        "UPDATE articles SET votes = votes + (%L) WHERE article_id = $1 RETURNING *",
+        [vote.votes]
+      );
+
+      return db
+        .query(voteUpdateStr, [articleId])
+        .then(({ rows: articleRows }) => {
+          return articleRows;
+        });
     })
     .catch((err) => {
       return err;
