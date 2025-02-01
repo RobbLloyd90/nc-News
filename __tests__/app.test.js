@@ -354,5 +354,13 @@ describe.only("USERS", () => {
           });
         });
     });
+    test("404: Return 'Not found' if the URL is not valid", () => {
+      return request(app)
+        .get("/api/use")
+        .expect(404)
+        .then((response) => {
+          expect(response.body.err).toEqual("Not found");
+        });
+    });
   });
 });
