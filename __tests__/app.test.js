@@ -4,6 +4,7 @@ const db = require("../db/connection");
 const app = require("../app");
 const seed = require("../db/seeds/seed");
 const testData = require("../db/data/test-data/index");
+const articles = require("../db/data/test-data/articles");
 
 beforeEach(() => {
   return seed(testData);
@@ -327,5 +328,31 @@ describe("APP.DELETE / DELETE REQUESTS", () => {
       .then((response) => {
         expect(response.body.err).toEqual("Not Found");
       });
+  });
+});
+describe.only("USERS", () => {
+  describe("APP.GET USERS", () => {
+    test("200: Return all abailable user", () => {
+      const user = {
+        username: "Lin-Manguine Marinara",
+        name: "Lin Manuel Miranda",
+        avatar_url:
+          "https://en.wikipedia.org/wiki/Lin-Manuel_Miranda#/media/File:Lin-Manuel_Miranda_in_Hamilton.jpg",
+      };
+      return request(app)
+        .get("/api/users")
+        .expect(200)
+        .then((response) => {
+          console.log(response.body.length);
+          expect(response.body.length).toBe(7);
+          response.body.forEach((user) => {
+            expect(user).toMatchObject({
+              username: expect.any(String),
+              name: expect.any(String),
+              avatar_url: expect.any(String),
+            });
+          });
+        });
+    });
   });
 });

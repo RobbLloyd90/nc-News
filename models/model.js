@@ -158,26 +158,8 @@ exports.fetchCommentToDelete = (id) => {
     });
 };
 
-// exports.fetchCommentToDelete = (id) => {
-//   const commentID = id.comment_id;
-//   const selectCommentStr = format(
-//     "SELECT * FROM comments WHERE comment_id = $1"
-//   );
-//   db.query(selectCommentStr, [commentID])
-//     .then(({ rows: commentRows }) => {
-//       //console.log(commentRows);
-//       const deleteCommentStr = format(
-//         "DELETE FROM comments WHERE comment_id = $1 RETURNING *"
-//       );
-//       //console.log(deleteCommentStr, [commentID]);
-//       return db.query(deleteCommentStr, [commentID]);
-//     })
-//     .then((results) => {
-//       console.log(results.rows);
-//       return results.rows;
-//     })
-//     .catch((err) => {
-//       console.log(err.code);
-//       return err;
-//     });
-// };
+exports.fetchAllUsers = () => {
+  return db.query("SELECT * FROM users;").then(({ rows: UsersRows }) => {
+    return UsersRows;
+  });
+};

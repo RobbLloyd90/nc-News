@@ -6,6 +6,7 @@ const {
   fetchPostCommentOnArticle,
   fetchVoteOnArticle,
   fetchCommentToDelete,
+  fetchAllUsers,
 } = require("../models/model");
 const endpoints = require("../endpoints.json");
 const { rawListeners } = require("../app");
@@ -105,6 +106,15 @@ exports.deleteComment = (req, res, next) => {
       if (results.status === 404) {
         next(results);
       } else res.status(204).send(results.rows);
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
+exports.getUsers = (req, res, next) => {
+  fetchAllUsers()
+    .then((users) => {
+      res.status(200).send(users);
     })
     .catch((err) => {
       next(err);

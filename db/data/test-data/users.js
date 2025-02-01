@@ -33,4 +33,10 @@ module.exports = [
     avatar_url:
       "https://unsplash.com/photos/orange-and-white-plastic-bottles-_f4icbXRZKk",
   },
+  {
+    username: "Lin-Manguine Marinara",
+    name: "Lin Manuel Miranda",
+    avatar_url:
+      "https://en.wikipedia.org/wiki/Lin-Manuel_Miranda#/media/File:Lin-Manuel_Miranda_in_Hamilton.jpg",
+  },
 ];
