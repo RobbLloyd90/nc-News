@@ -5,8 +5,8 @@ const { createRef } = require("../db/seeds/utils");
 const articles = require("../db/data/test-data/articles");
 
 exports.fetchAllTopics = () => {
-  return db.query("SELECT * FROM topics;").then((result) => {
-    return result.rows;
+  return db.query("SELECT * FROM topics;").then(({ rows: topicRows }) => {
+    return topicRows;
   });
 };
 
@@ -15,26 +15,69 @@ exports.fetchArticleByID = (id) => {
 
   return db
     .query(
-      `SELECT * FROM articles 
-      WHERE article_id = $1`,
+      `SELECT articles.*, COUNT(comments.article_id) AS comment_count FROM articles
+      LEFT JOIN comments ON articles.article_id = comments.article_id WHERE articles.article_id = $1
+      GROUP BY articles.article_id`,
       [articleIDdNum]
     )
     .then(({ rows: articleRows }) => {
       return articleRows;
     });
 };
-exports.fetchAllArticles = () => {
-  return db
-    .query(
-      `SELECT articles.title, articles.topic, articles.author, articles.created_at, articles.votes, articles.article_img_url, 
-      COUNT(comments.article_id) 
+exports.fetchAllArticles = (data) => {
+  let sortBy = data.query.sort;
+  let orderBy = data.query.order;
+  let filterByTopic = data.query.topic;
+  let queryValues = [];
+  let articleStr = `SELECT articles.title, articles.topic, articles.author, articles.created_at, articles.votes, articles.article_img_url, 
+      COUNT(comments.article_id)
       AS comment_count FROM articles 
       LEFT JOIN comments ON articles.article_id = comments.article_id 
-      GROUP BY articles.article_id 
-      ORDER BY articles.created_at DESC;`
-    )
+      GROUP BY articles.article_id`;
+
+  if (filterByTopic !== undefined) {
+    return db
+      .query(
+        `SELECT articles.title, articles.topic, articles.author, articles.created_at, articles.votes, articles.article_img_url, 
+          COUNT(comments.article_id) 
+          AS comment_count FROM articles 
+          LEFT JOIN comments ON articles.article_id = comments.article_id WHERE articles.topic = 'cats'
+          GROUP BY articles.article_id ORDER BY articles.created_at ASC;`
+      )
+      .then(({ rows: topicRows }) => {
+        return topicRows;
+      })
+      .catch((err) => {
+        return err;
+      });
+  }
+  if (sortBy !== undefined) {
+    if (orderBy === undefined) {
+      orderBy = "desc";
+    }
+    queryValues.push(sortBy + ` ` + orderBy);
+    articleStr += ` ORDER BY articles.`;
+    return db.query(articleStr + queryValues).then(({ rows: articleRows }) => {
+      return articleRows;
+    });
+  }
+  if (sortBy === undefined) {
+    if (orderBy === "asc") {
+      queryValues.push(orderBy);
+      articleStr += ` ORDER BY articles.created_at `;
+    }
+    if (orderBy === undefined) {
+      queryValues.push("desc");
+      articleStr += ` ORDER BY articles.created_at `;
+    }
+  }
+  return db
+    .query(articleStr + queryValues)
     .then(({ rows: articleRows }) => {
       return articleRows;
+    })
+    .catch((err) => {
+      return err;
     });
 };
 
