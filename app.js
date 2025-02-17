@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const {
   getApi,
   getTopics,
@@ -12,6 +13,7 @@ const {
 } = require("./controllers/controller");
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 app.get("/api", getApi);
@@ -20,6 +22,7 @@ app.get("/api/articles/:article_id", getArticleByID);
 app.get("/api/articles", getAllArticles);
 app.get("/api/articles/:article_id/comments", getCommentByArticleID);
 app.get("/api/users", getUsers);
+app.get("/api/articles?*", getAllArticles);
 
 app.post("/api/articles/:article_id/comments", postCommentOnArticle);
 app.post("/api/articles/:article_id", voteOnArticle);
