@@ -83,7 +83,7 @@ describe("APP.GET / GET REQUESTS", () => {
         });
     });
   });
-  describe("GET /api/articles", () => {
+  describe.only("GET /api/articles", () => {
     test("200: Respones with an array of articles descending based on time of creation. Does not include body property", () => {
       return request(app)
         .get("/api/articles")
@@ -92,11 +92,12 @@ describe("APP.GET / GET REQUESTS", () => {
           const articleCreationTimeStamp = response.body.map(
             (body) => body.created_at
           );
-          expect(articleCreationTimeStamp).toBeSorted({ descending: true });
 
+          expect(articleCreationTimeStamp).toBeSorted({ descending: true });
           expect(response.body.length).toBe(13);
           response.body.forEach((article) => {
             expect(article).toMatchObject({
+              article_id: expect.any(Number),
               title: expect.any(String),
               topic: expect.any(String),
               author: expect.any(String),
