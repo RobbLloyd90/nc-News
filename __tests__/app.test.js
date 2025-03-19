@@ -48,7 +48,7 @@ describe("APP.GET / GET REQUESTS", () => {
     });
   });
   describe("GET /api/articles/:article_id", () => {
-    test.only("200: Responds with if the article positioned at the given article_id", () => {
+    test("200: Responds with if the article positioned at the given article_id", () => {
       return request(app)
         .get("/api/articles/2")
         .expect(200)
@@ -85,7 +85,7 @@ describe("APP.GET / GET REQUESTS", () => {
     });
   });
   describe("GET /api/articles", () => {
-    test.only("200: Respones with an array of articles descending based on time of creation. Does not include body property", () => {
+    test("200: Respones with an array of articles descending based on time of creation. Does not include body property", () => {
       return request(app)
         .get("/api/articles")
         .expect(200)
@@ -367,7 +367,7 @@ describe("USERS", () => {
     });
   });
 });
-describe.only("Qurries", () => {
+describe("Qurries", () => {
   test("200: If no queries given respones with an array of articles descending based on time of creation. Does not include body property", () => {
     return request(app)
       .get("/api/articles")
