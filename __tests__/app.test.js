@@ -4,8 +4,6 @@ const db = require("../db/connection");
 const app = require("../app");
 const seed = require("../db/seeds/seed");
 const testData = require("../db/data/test-data/index");
-const articles = require("../db/data/test-data/articles");
-const { string } = require("pg-format");
 
 beforeEach(() => {
   return seed(testData);
@@ -50,11 +48,13 @@ describe("APP.GET / GET REQUESTS", () => {
     });
   });
   describe("GET /api/articles/:article_id", () => {
-    test("200: Responds with if the article positioned at the given article_id", () => {
+    test.only("200: Responds with if the article positioned at the given article_id", () => {
       return request(app)
         .get("/api/articles/2")
         .expect(200)
         .then((response) => {
+          console.log(response.body);
+
           expect(response.body).toMatchObject({
             title: expect.any(String),
             topic: expect.any(String),
@@ -85,7 +85,7 @@ describe("APP.GET / GET REQUESTS", () => {
     });
   });
   describe("GET /api/articles", () => {
-    test("200: Respones with an array of articles descending based on time of creation. Does not include body property", () => {
+    test.only("200: Respones with an array of articles descending based on time of creation. Does not include body property", () => {
       return request(app)
         .get("/api/articles")
         .expect(200)
@@ -93,6 +93,8 @@ describe("APP.GET / GET REQUESTS", () => {
           const articleCreationTimeStamp = response.body.map(
             (body) => body.created_at
           );
+
+          console.log(response.body);
           expect(articleCreationTimeStamp).toBeSorted({ descending: true });
           expect(response.body.length).toBe(13);
           response.body.forEach((article) => {
@@ -364,113 +366,25 @@ describe("USERS", () => {
         });
     });
   });
-  describe("Qurries", () => {
-    test("200: If no queries given respones with an array of articles descending based on time of creation. Does not include body property", () => {
-      return request(app)
-        .get("/api/articles")
-        .expect(200)
-        .then((response) => {
-          const articleCreationTimeStamp = response.body.map(
-            (body) => body.created_at
-          );
+});
+describe.only("Qurries", () => {
+  test("200: If no queries given respones with an array of articles descending based on time of creation. Does not include body property", () => {
+    return request(app)
+      .get("/api/articles")
+      .expect(200)
+      .then((response) => {
+        const articleCreationTimeStamp = response.body.map(
+          (body) => body.created_at
+        );
 
-          expect(articleCreationTimeStamp).toBeSorted({ descending: true });
+        expect(articleCreationTimeStamp).toBeSorted({ descending: true });
 
-          expect(response.body.length).toBe(13);
-          response.body.forEach((article) => {
-            expect(article).toMatchObject({
-              title: expect.any(String),
-              topic: expect.any(String),
-              author: expect.any(String),
-              created_at: expect.any(String),
-              votes: expect.any(Number),
-              article_img_url: expect.any(String),
-              alt_img: expect.any(String),
-              comment_count: expect.any(String),
-            });
-          });
-        });
-    });
-    test("200: change the order between ascending and decsending", () => {
-      return request(app)
-        .get("/api/articles?order=asc")
-        .expect(200)
-        .then((response) => {
-          const articleCreationTimeStamp = response.body.map(
-            (body) => body.created_at
-          );
-
-          expect(articleCreationTimeStamp).toBeSorted({ ascending: true });
-
-          expect(response.body.length).toBe(13);
-          response.body.forEach((article) => {
-            expect(article).toMatchObject({
-              title: expect.any(String),
-              topic: expect.any(String),
-              author: expect.any(String),
-              created_at: expect.any(String),
-              votes: expect.any(Number),
-              article_img_url: expect.any(String),
-              alt_img: expect.any(String),
-              comment_count: expect.any(String),
-            });
-          });
-        });
-    });
-    test("200: change the sort articles by any valid column", () => {
-      return request(app)
-        .get("/api/articles?sort=title&order=asc")
-        .expect(200)
-        .then((response) => {
-          const sortByCheck = response.body.map((body) => body.title);
-
-          expect(sortByCheck).toBeSorted({ ascending: true });
-
-          expect(response.body.length).toBe(13);
-          response.body.forEach((article) => {
-            expect(article).toMatchObject({
-              title: expect.any(String),
-              topic: expect.any(String),
-              author: expect.any(String),
-              created_at: expect.any(String),
-              votes: expect.any(Number),
-              article_img_url: expect.any(String),
-              alt_img: expect.any(String),
-              comment_count: expect.any(String),
-            });
-          });
-        });
-    });
-    test("200: api/articles - topic query", () => {
-      return request(app)
-        .get("/api/articles?topic=cat")
-        .expect(200)
-        .then((response) => {
-          expect(response.body.length).toBe(1);
-          response.body.forEach((article) => {
-            expect(article).toMatchObject({
-              title: expect.any(String),
-              topic: expect.any(String),
-              author: expect.any(String),
-              created_at: expect.any(String),
-              votes: expect.any(Number),
-              article_img_url: expect.any(String),
-              alt_img: expect.any(String),
-              comment_count: expect.any(String),
-            });
-          });
-        });
-    });
-    test("200 - article id with comment count", () => {
-      return request(app)
-        .get("/api/articles/1")
-        .expect(200)
-        .then((response) => {
-          expect(response.body).toMatchObject({
+        expect(response.body.length).toBe(13);
+        response.body.forEach((article) => {
+          expect(article).toMatchObject({
             title: expect.any(String),
             topic: expect.any(String),
             author: expect.any(String),
-            body: expect.any(String),
             created_at: expect.any(String),
             votes: expect.any(Number),
             article_img_url: expect.any(String),
@@ -478,6 +392,96 @@ describe("USERS", () => {
             comment_count: expect.any(String),
           });
         });
-    });
+      });
+  });
+  test("200: change the order between ascending and decsending", () => {
+    return request(app)
+      .get("/api/articles?order=asc")
+      .expect(200)
+      .then((response) => {
+        const articleCreationTimeStamp = response.body.map(
+          (body) => body.created_at
+        );
+
+        expect(articleCreationTimeStamp).toBeSorted({ ascending: true });
+
+        expect(response.body.length).toBe(13);
+        response.body.forEach((article) => {
+          expect(article).toMatchObject({
+            title: expect.any(String),
+            topic: expect.any(String),
+            author: expect.any(String),
+            created_at: expect.any(String),
+            votes: expect.any(Number),
+            article_img_url: expect.any(String),
+            alt_img: expect.any(String),
+            comment_count: expect.any(String),
+          });
+        });
+      });
+  });
+  test("200: change the sort articles by any valid column", () => {
+    return request(app)
+      .get("/api/articles?sort=title&order=asc")
+      .expect(200)
+      .then((response) => {
+        const sortByCheck = response.body.map((body) => body.title);
+
+        expect(sortByCheck).toBeSorted({ ascending: true });
+
+        expect(response.body.length).toBe(13);
+        response.body.forEach((article) => {
+          expect(article).toMatchObject({
+            title: expect.any(String),
+            topic: expect.any(String),
+            author: expect.any(String),
+            created_at: expect.any(String),
+            votes: expect.any(Number),
+            article_img_url: expect.any(String),
+            alt_img: expect.any(String),
+            comment_count: expect.any(String),
+          });
+        });
+      });
+  });
+  test("200: api/articles - topic query", () => {
+    return request(app)
+      .get("/api/articles?topic=cat")
+      .expect(200)
+      .then((response) => {
+        console.log(response.body);
+
+        expect(response.body.length).toBe(1);
+        response.body.forEach((article) => {
+          expect(article).toMatchObject({
+            title: expect.any(String),
+            topic: expect.any(String),
+            author: expect.any(String),
+            created_at: expect.any(String),
+            votes: expect.any(Number),
+            article_img_url: expect.any(String),
+            alt_img: expect.any(String),
+            comment_count: expect.any(String),
+          });
+        });
+      });
+  });
+  test("200 - article id with comment count", () => {
+    return request(app)
+      .get("/api/articles/1")
+      .expect(200)
+      .then((response) => {
+        expect(response.body).toMatchObject({
+          title: expect.any(String),
+          topic: expect.any(String),
+          author: expect.any(String),
+          body: expect.any(String),
+          created_at: expect.any(String),
+          votes: expect.any(Number),
+          article_img_url: expect.any(String),
+          alt_img: expect.any(String),
+          comment_count: expect.any(String),
+        });
+      });
   });
 });

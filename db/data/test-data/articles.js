@@ -20,7 +20,7 @@ module.exports = [
     article_img_url:
       "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
     alt_img:
-      "A stack of 6 folded newspapers with the corners facing towards the camera. The background is light grey and blurred",
+      "A circle made from various vegetables. The circle is made up of cucumbers, corn, green bell pepper, green and purple chillis, spring onions and broccoli.",
   },
   {
     title: "Eight pug gifs that remind me of mitch",
@@ -42,7 +42,7 @@ module.exports = [
     article_img_url:
       "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
     alt_img:
-      "A stack of 6 folded newspapers with the corners facing towards the camera. The background is light grey and blurred",
+      "A close up of a node js sticker, the font is font and pointed. the o in node is a green hexagon. The font for js in node js is green placed insided a wireframe green hexagon.  ",
   },
   {
     title: "UNCOVERED: catspiracy to bring down democracy",
@@ -53,7 +53,7 @@ module.exports = [
     article_img_url:
       "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
     alt_img:
-      "A stack of 6 folded newspapers with the corners facing towards the camera. The background is light grey and blurred",
+      "Close-up photo of a RGB keyboard with a virbant cyan light emitting from in and between each key.",
   },
   {
     title: "A",
@@ -64,7 +64,7 @@ module.exports = [
     article_img_url:
       "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
     alt_img:
-      "A stack of 6 folded newspapers with the corners facing towards the camera. The background is light grey and blurred",
+      "A sticker of the npm logo, the text colour is white with a red outline.",
   },
   {
     title: "Z",
@@ -74,8 +74,7 @@ module.exports = [
     created_at: 1578406080000,
     article_img_url:
       "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-    alt_img:
-      "A stack of 6 folded newspapers with the corners facing towards the camera. The background is light grey and blurred",
+    alt_img: "Four scrable titles overlapping each other spelling out HTML",
   },
   {
     title: "Does Mitch predate civilisation?",
@@ -86,7 +85,7 @@ module.exports = [
     article_img_url:
       "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
     alt_img:
-      "A stack of 6 folded newspapers with the corners facing towards the camera. The background is light grey and blurred",
+      "Paird of hands typing code on a laptop, the images hue is cool, suggesting the image is taking place late at evening",
   },
   {
     title: "They're not exactly dogs, are they?",
@@ -96,8 +95,7 @@ module.exports = [
     created_at: 1591438200000,
     article_img_url:
       "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-    alt_img:
-      "A stack of 6 folded newspapers with the corners facing towards the camera. The background is light grey and blurred",
+    alt_img: "Lines of code dislayed at an angle on a laptop screen",
   },
   {
     title: "Seven inspirational thought leaders from Manchester UK",
@@ -108,7 +106,7 @@ module.exports = [
     article_img_url:
       "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
     alt_img:
-      "A stack of 6 folded newspapers with the corners facing towards the camera. The background is light grey and blurred",
+      "Close up of a white and red football with mitre written on the center of the ball.",
   },
   {
     title: "Am I a cat?",
@@ -119,7 +117,7 @@ module.exports = [
     article_img_url:
       "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
     alt_img:
-      "A stack of 6 folded newspapers with the corners facing towards the camera. The background is light grey and blurred",
+      "A football staduim with a live game playing between a team wearing white and the other wearing red. The staduim is packet with fans.",
   },
   {
     title: "Moustache",
@@ -129,8 +127,7 @@ module.exports = [
     created_at: 1602419040000,
     article_img_url:
       "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-    alt_img:
-      "A stack of 6 folded newspapers with the corners facing towards the camera. The background is light grey and blurred",
+    alt_img: "A close up of a football game.",
   },
   {
     title: "Another article about Mitch",
@@ -141,6 +138,6 @@ module.exports = [
     article_img_url:
       "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
     alt_img:
-      "A stack of 6 folded newspapers with the corners facing towards the camera. The background is light grey and blurred",
+      "An orange football with a lime green football boot placed ontop of it.",
   },
 ];
