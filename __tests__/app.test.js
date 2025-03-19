@@ -63,6 +63,7 @@ describe("APP.GET / GET REQUESTS", () => {
             created_at: expect.any(String),
             votes: expect.any(Number),
             article_img_url: expect.any(String),
+            alt_img: expect.any(String),
           });
         });
     });
@@ -92,7 +93,6 @@ describe("APP.GET / GET REQUESTS", () => {
           const articleCreationTimeStamp = response.body.map(
             (body) => body.created_at
           );
-
           expect(articleCreationTimeStamp).toBeSorted({ descending: true });
           expect(response.body.length).toBe(13);
           response.body.forEach((article) => {
@@ -104,6 +104,7 @@ describe("APP.GET / GET REQUESTS", () => {
               created_at: expect.any(String),
               votes: expect.any(Number),
               article_img_url: expect.any(String),
+              alt_img: expect.any(String),
               comment_count: expect.any(String),
             });
           });
@@ -244,14 +245,11 @@ describe("APP.POST", () => {
 
       const voteUpdate = { votes: 1 };
 
-      console.log(voteUpdate);
-
       return request(app)
         .post("/api/articles/1")
         .send(voteUpdate)
         .expect(203)
         .then((respones) => {
-          console.log(respones.body);
           expect(respones.body[0].votes).toBe(101);
           expect(respones.body[0].article_id).toBe(1);
         });
@@ -387,6 +385,7 @@ describe("USERS", () => {
               created_at: expect.any(String),
               votes: expect.any(Number),
               article_img_url: expect.any(String),
+              alt_img: expect.any(String),
               comment_count: expect.any(String),
             });
           });
@@ -412,6 +411,7 @@ describe("USERS", () => {
               created_at: expect.any(String),
               votes: expect.any(Number),
               article_img_url: expect.any(String),
+              alt_img: expect.any(String),
               comment_count: expect.any(String),
             });
           });
@@ -435,6 +435,7 @@ describe("USERS", () => {
               created_at: expect.any(String),
               votes: expect.any(Number),
               article_img_url: expect.any(String),
+              alt_img: expect.any(String),
               comment_count: expect.any(String),
             });
           });
@@ -454,6 +455,7 @@ describe("USERS", () => {
               created_at: expect.any(String),
               votes: expect.any(Number),
               article_img_url: expect.any(String),
+              alt_img: expect.any(String),
               comment_count: expect.any(String),
             });
           });
@@ -472,6 +474,7 @@ describe("USERS", () => {
             created_at: expect.any(String),
             votes: expect.any(Number),
             article_img_url: expect.any(String),
+            alt_img: expect.any(String),
             comment_count: expect.any(String),
           });
         });

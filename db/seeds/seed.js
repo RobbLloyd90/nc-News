@@ -104,7 +104,6 @@ const seed = ({ topicData, userData, articleData, commentData }) => {
           ]
         )
       );
-      console.log(formattedArticleData);
       return db.query(insertArticlesQueryStr);
     })
     .then(({ rows: articleRows }) => {

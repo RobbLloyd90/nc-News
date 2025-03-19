@@ -29,16 +29,15 @@ exports.fetchAllArticles = (data) => {
   let orderBy = data.query.order;
   let filterByTopic = data.query.topic;
   let queryValues = [];
-  let articleStr = `SELECT articles.article_id, articles.title, articles.topic, articles.author, articles.created_at, articles.votes, articles.article_img_url, 
+  let articleStr = `SELECT articles.article_id, articles.title, articles.topic, articles.author, articles.created_at, articles.votes, articles.article_img_url, articles.alt_img,
       COUNT(comments.article_id)
       AS comment_count FROM articles 
       LEFT JOIN comments ON articles.article_id = comments.article_id 
       GROUP BY articles.article_id`;
-
   if (filterByTopic !== undefined) {
     return db
       .query(
-        `SELECT articles.title, articles.topic, articles.author, articles.created_at, articles.votes, articles.article_img_url, 
+        `SELECT articles.title, articles.topic, articles.author, articles.created_at, articles.votes, articles.article_img_url, articles.alt_img,
           COUNT(comments.article_id) 
           AS comment_count FROM articles 
           LEFT JOIN comments ON articles.article_id = comments.article_id WHERE articles.topic = 'cats'
