@@ -83,7 +83,7 @@ describe("APP.GET / GET REQUESTS", () => {
         });
     });
   });
-  describe.only("GET /api/articles", () => {
+  describe("GET /api/articles", () => {
     test("200: Respones with an array of articles descending based on time of creation. Does not include body property", () => {
       return request(app)
         .get("/api/articles")
@@ -110,7 +110,7 @@ describe("APP.GET / GET REQUESTS", () => {
         });
     });
   });
-  describe("Get /api/articles/:articles_id/comments", () => {
+  describe("GET /api/articles/:articles_id/comments", () => {
     test("200: Responses with all the comments from the request article", () => {
       return request(app)
         .get("/api/articles/1/comments")
@@ -244,11 +244,14 @@ describe("APP.POST", () => {
 
       const voteUpdate = { votes: 1 };
 
+      console.log(voteUpdate);
+
       return request(app)
         .post("/api/articles/1")
         .send(voteUpdate)
         .expect(203)
         .then((respones) => {
+          console.log(respones.body);
           expect(respones.body[0].votes).toBe(101);
           expect(respones.body[0].article_id).toBe(1);
         });

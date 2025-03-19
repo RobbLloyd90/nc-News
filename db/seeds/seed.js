@@ -44,7 +44,8 @@ const seed = ({ topicData, userData, articleData, commentData }) => {
         body VARCHAR NOT NULL,
         created_at TIMESTAMP DEFAULT NOW(),
         votes INT DEFAULT 0 NOT NULL,
-        article_img_url VARCHAR DEFAULT 'https://images.pexels.com/photos/97050/pexels-photo-97050.jpeg?w=700&h=700'
+        article_img_url VARCHAR DEFAULT 'https://images.pexels.com/photos/97050/pexels-photo-97050.jpeg?w=700&h=700',
+        alt_img VARCHAR NOT NULL
       );`);
     })
     .then(() => {
@@ -80,7 +81,7 @@ const seed = ({ topicData, userData, articleData, commentData }) => {
     .then(() => {
       const formattedArticleData = articleData.map(convertTimestampToDate);
       const insertArticlesQueryStr = format(
-        "INSERT INTO articles (title, topic, author, body, created_at, votes, article_img_url) VALUES %L RETURNING *;",
+        "INSERT INTO articles (title, topic, author, body, created_at, votes, article_img_url, alt_img) VALUES %L RETURNING *;",
         formattedArticleData.map(
           ({
             title,
@@ -90,10 +91,20 @@ const seed = ({ topicData, userData, articleData, commentData }) => {
             created_at,
             votes = 0,
             article_img_url,
-          }) => [title, topic, author, body, created_at, votes, article_img_url]
+            alt_img,
+          }) => [
+            title,
+            topic,
+            author,
+            body,
+            created_at,
+            votes,
+            article_img_url,
+            alt_img,
+          ]
         )
       );
-
+      console.log(formattedArticleData);
       return db.query(insertArticlesQueryStr);
     })
     .then(({ rows: articleRows }) => {

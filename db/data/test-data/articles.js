@@ -8,6 +8,8 @@ module.exports = [
     votes: 100,
     article_img_url:
       "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
+    alt_img:
+      "A stack of 6 folded newspapers with the corners facing towards the camera. The background is light grey and blurred",
   },
   {
     title: "Sony Vaio; or, The Laptop",
@@ -17,6 +19,8 @@ module.exports = [
     created_at: 1602828180000,
     article_img_url:
       "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
+    alt_img:
+      "A stack of 6 folded newspapers with the corners facing towards the camera. The background is light grey and blurred",
   },
   {
     title: "Eight pug gifs that remind me of mitch",
@@ -26,6 +30,8 @@ module.exports = [
     created_at: 1604394720000,
     article_img_url:
       "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
+    alt_img:
+      "A stack of 6 folded newspapers with the corners facing towards the camera. The background is light grey and blurred",
   },
   {
     title: "Student SUES Mitch!",
@@ -35,6 +41,8 @@ module.exports = [
     created_at: 1588731240000,
     article_img_url:
       "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
+    alt_img:
+      "A stack of 6 folded newspapers with the corners facing towards the camera. The background is light grey and blurred",
   },
   {
     title: "UNCOVERED: catspiracy to bring down democracy",
@@ -44,6 +52,8 @@ module.exports = [
     created_at: 1596464040000,
     article_img_url:
       "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
+    alt_img:
+      "A stack of 6 folded newspapers with the corners facing towards the camera. The background is light grey and blurred",
   },
   {
     title: "A",
@@ -53,6 +63,8 @@ module.exports = [
     created_at: 1602986400000,
     article_img_url:
       "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
+    alt_img:
+      "A stack of 6 folded newspapers with the corners facing towards the camera. The background is light grey and blurred",
   },
   {
     title: "Z",
@@ -62,6 +74,8 @@ module.exports = [
     created_at: 1578406080000,
     article_img_url:
       "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
+    alt_img:
+      "A stack of 6 folded newspapers with the corners facing towards the camera. The background is light grey and blurred",
   },
   {
     title: "Does Mitch predate civilisation?",
@@ -71,6 +85,8 @@ module.exports = [
     created_at: 1587089280000,
     article_img_url:
       "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
+    alt_img:
+      "A stack of 6 folded newspapers with the corners facing towards the camera. The background is light grey and blurred",
   },
   {
     title: "They're not exactly dogs, are they?",
@@ -80,6 +96,8 @@ module.exports = [
     created_at: 1591438200000,
     article_img_url:
       "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
+    alt_img:
+      "A stack of 6 folded newspapers with the corners facing towards the camera. The background is light grey and blurred",
   },
   {
     title: "Seven inspirational thought leaders from Manchester UK",
@@ -89,6 +107,8 @@ module.exports = [
     created_at: 1589433300000,
     article_img_url:
       "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
+    alt_img:
+      "A stack of 6 folded newspapers with the corners facing towards the camera. The background is light grey and blurred",
   },
   {
     title: "Am I a cat?",
@@ -98,6 +118,8 @@ module.exports = [
     created_at: 1579126860000,
     article_img_url:
       "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
+    alt_img:
+      "A stack of 6 folded newspapers with the corners facing towards the camera. The background is light grey and blurred",
   },
   {
     title: "Moustache",
@@ -107,6 +129,8 @@ module.exports = [
     created_at: 1602419040000,
     article_img_url:
       "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
+    alt_img:
+      "A stack of 6 folded newspapers with the corners facing towards the camera. The background is light grey and blurred",
   },
   {
     title: "Another article about Mitch",
@@ -116,5 +140,7 @@ module.exports = [
     created_at: 1602419040000,
     article_img_url:
       "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
+    alt_img:
+      "A stack of 6 folded newspapers with the corners facing towards the camera. The background is light grey and blurred",
   },
 ];

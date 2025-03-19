@@ -8,6 +8,8 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/11035380/pexels-photo-11035380.jpeg?w=700&h=700",
+    alt_img:
+      "A close up of a node js sticker, the font is font and pointed. the o in node is a green hexagon. The font for js in node js is green placed insided a wireframe green hexagon.  ",
   },
   {
     title: "The Rise Of Thinking Machines: How IBM's Watson Takes On The World",
@@ -18,6 +20,8 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg?w=700&h=700",
+    alt_img:
+      "A web of light blue lights that look like connections being sent across the internet. Set to the background of a busy city at night.",
   },
   {
     title: "22 Amazing open source React projects",
@@ -28,6 +32,8 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/11035471/pexels-photo-11035471.jpeg?w=700&h=700",
+    alt_img:
+      "A React sticker being held up in front of the camera. The sticker is blue in colour and looks like an atom with the nucleus at the center.",
   },
   {
     title: "Making sense of Redux",
@@ -38,6 +44,8 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/4974912/pexels-photo-4974912.jpeg?w=700&h=700",
+    alt_img:
+      "Two sliver macBook Pros on a table with a pair of hands typing code on the laptop closeest to the camera.",
   },
   {
     title: "Please stop worrying about Angular 3",
@@ -48,6 +56,8 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/14011035/pexels-photo-14011035.jpeg?w=700&h=700",
+    alt_img:
+      "Close-up photo of a RGB keyboard with a virbant cyan light emitting from in and between each key.",
   },
   {
     title:
@@ -59,6 +69,7 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/4383298/pexels-photo-4383298.jpeg?w=700&h=700",
+    alt_img: "Close up image of a wall of code coloured red, blue and white",
   },
   {
     title: "Using React Native: One Year Later",
@@ -69,6 +80,7 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/6424586/pexels-photo-6424586.jpeg?w=700&h=700",
+    alt_img: "Lines of code dislayed at an angle on a laptop screen",
   },
   {
     title: "Express.js: A Server-Side JavaScript Framework",
@@ -79,6 +91,8 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/11035482/pexels-photo-11035482.jpeg?w=700&h=700",
+    alt_img:
+      "A sticker of the npm logo, the text colour is white with a red outline.",
   },
   {
     title: "Learn HTML5, CSS3, and Responsive WebSite Design in One Go",
@@ -89,6 +103,7 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/1591061/pexels-photo-1591061.jpeg?w=700&h=700",
+    alt_img: "Four scrable titles overlapping each other spelling out HTML",
   },
   {
     title:
@@ -100,6 +115,8 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/11035481/pexels-photo-11035481.jpeg?w=700&h=700",
+    alt_img:
+      "A json sticker with black text wrapped around black curly brackets",
   },
   {
     title: "Designing Better JavaScript APIs",
@@ -110,6 +127,8 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/5483071/pexels-photo-5483071.jpeg?w=700&h=700",
+    alt_img:
+      "Paird of hands typing code on a laptop, the images hue is cool, suggesting the image is taking place late at evening",
   },
   {
     title: "The battle for Node.js security has only begun",
@@ -120,6 +139,7 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/10845119/pexels-photo-10845119.jpeg?w=700&h=700",
+    alt_img: "Lines of code dislayed at an angle on a laptop screen",
   },
   {
     title: "What does Jose Mourinho's handwriting say about his personality?",
@@ -130,6 +150,8 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/114296/pexels-photo-114296.jpeg?w=700&h=700",
+    alt_img:
+      "Wide shot of a football pitch low to the ground. In the distance is a goal and the sun setting between the branches of the trees. In the foreground there is a white football ",
   },
   {
     title: "Who Will Manage Your Club in 2021?",
@@ -140,6 +162,8 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/209841/pexels-photo-209841.jpeg?w=700&h=700",
+    alt_img:
+      "Close up of a white football with black detailing like metal liquid",
   },
   {
     title: "Why do England managers keep making the same mistakes?",
@@ -150,6 +174,8 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/262524/pexels-photo-262524.jpeg?w=700&h=700",
+    alt_img:
+      "A team of male football players wearing blue tops and black shorts gathered around in a circle on a grass pitch.",
   },
   {
     title: "History of FC Barcelona",
@@ -160,6 +186,8 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/102448/pexels-photo-102448.jpeg?w=700&h=700",
+    alt_img:
+      "Close up of a white and red football with mitre written on the center of the ball.",
   },
   {
     title: "Which current Premier League manager was the best player?",
@@ -170,6 +198,8 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/47343/the-ball-stadion-horn-corner-47343.jpeg?w=700&h=700",
+    alt_img:
+      "Camera view pointing slightly down at an angle of the corner of a football pitch with a yellow corner flag and a football next to it.",
   },
   {
     title: "The People Tracking Every Touch, Pass And Tackle in the World Cup",
@@ -180,6 +210,8 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/1884576/pexels-photo-1884576.jpeg?w=700&h=700",
+    alt_img:
+      "A football staduim with a live game playing between a team wearing white and the other wearing red. The staduim is packet with fans.",
   },
   {
     title: "Who are the most followed clubs and players on Instagram?",
@@ -190,6 +222,8 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/685382/pexels-photo-685382.jpeg?w=700&h=700",
+    alt_img:
+      "Three women football players, one in goal, a strker and a defender. The striker is about to kick the ball towards the goal while the defender just behind trying to intercept",
   },
   {
     title: "History of Football",
@@ -200,6 +234,8 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/3621104/pexels-photo-3621104.jpeg?w=700&h=700",
+    alt_img:
+      "An orange football with a lime green football boot placed ontop of it.",
   },
   {
     title: "Agility Training Drills For Football Players",
@@ -210,6 +246,7 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/3448250/pexels-photo-3448250.jpeg?w=700&h=700",
+    alt_img: "Aerial view of a vibrant green fotoball pitch.",
   },
   {
     title: "Defensive Metrics: Measuring the Intensity of a High Press",
@@ -220,6 +257,7 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/906073/pexels-photo-906073.jpeg?w=700&h=700",
+    alt_img: "A close up of a football game.",
   },
   {
     title: "Sunday league football",
@@ -230,6 +268,7 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/774321/pexels-photo-774321.jpeg?w=700&h=700",
+    alt_img: "Close up of a black football boot with a white Nike logo tick",
   },
   {
     title: "Game of talents: management lessons from top football coaches",
@@ -240,6 +279,7 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/168872/pexels-photo-168872.jpeg?w=700&h=700",
+    alt_img: "Someone kicking a football on a clay pitch.",
   },
   {
     title: "Sweet potato & butternut squash soup with lemon & garlic toast",
@@ -250,6 +290,8 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg?w=700&h=700",
+    alt_img:
+      "Top down view of two bowls filled with various vegetables, beans and side dishes.",
   },
   {
     title: "HOW COOKING HAS CHANGED US",
@@ -260,6 +302,8 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/2284166/pexels-photo-2284166.jpeg?w=700&h=700",
+    alt_img:
+      "Top down view with tomatoes, cucumbners, tahini sauce, and sesame seeds with two people preparing a head of lettuce, red bell pepper, and avocado on a long wooden chopping board",
   },
   {
     title: "Thanksgiving Drinks for Everyone",
@@ -270,6 +314,7 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/1565982/pexels-photo-1565982.jpeg?w=700&h=700",
+    alt_img: "A rustic top down view of a burger, tomatoes and handmade crisps",
   },
   {
     title: "High Altitude Cooking",
@@ -280,6 +325,8 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/691114/pexels-photo-691114.jpeg?w=700&h=700",
+    alt_img:
+      "Top down view of tomato sauce with baked eggs in a pan, tomaotoes and basil on the vine next to the pan.",
   },
   {
     title: "A BRIEF HISTORY OF FOOD—NO BIG DEAL",
@@ -290,6 +337,8 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/357743/pexels-photo-357743.jpeg?w=700&h=700",
+    alt_img:
+      "Top down view of three white ceramic spoons, from left to right in each spoon there is, a dried herb, salt, and safforn.",
   },
   {
     title:
@@ -301,6 +350,8 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/175753/pexels-photo-175753.jpeg?w=700&h=700",
+    alt_img:
+      "A very large wok with a chef wearing yellow gloves cooking various orange, red, pink and green vegtables ",
   },
   {
     title: "What to Cook This Week",
@@ -311,6 +362,8 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/349609/pexels-photo-349609.jpeg?w=700&h=700",
+    alt_img:
+      "Top down view of a chopping board with a knife on the far left side of the images and some mint leafs in the upper right corner of the image.",
   },
   {
     title: "Halal food: Keeping pure and true",
@@ -321,6 +374,8 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/954677/pexels-photo-954677.jpeg?w=700&h=700",
+    alt_img:
+      "A firerly background with flames rising up and white smoke and steam. Four black pots cooking within the fire and a hand on the left side of the image pouring water into the second pot ",
   },
   {
     title: "Seafood substitutions are increasing",
@@ -331,6 +386,8 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?w=700&h=700",
+    alt_img:
+      "Six thick tree trunks turned into plates with micro vegetables arranged on each plate. A chef in white is spooning over the finishing touches to the dish",
   },
   {
     title: "The Notorious MSG’s Unlikely Formula For Success",
@@ -341,6 +398,8 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/2403392/pexels-photo-2403392.jpeg?w=700&h=700",
+    alt_img:
+      "A golden hued image with four plates and a cooked salom fillet takes center image and a arm is above all the dishes holding a pan aboput to spoon over a sauce.",
   },
   {
     title: "Stone Soup",
@@ -351,6 +410,8 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/33242/cooking-ingredient-cuisine-kitchen.jpg?w=700&h=700",
+    alt_img:
+      "Top down view of six bowls with different vegetables in each one and a sharpe knife on a plate with a spoon and fork beside. Mushrooms, chillies, ginger, and sliced lime can be seen in each bowl",
   },
   {
     title: "The vegan carnivore?",
@@ -361,6 +422,8 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/1414651/pexels-photo-1414651.jpeg?w=700&h=700",
+    alt_img:
+      "A circle made from various vegetables. The circle is made up of cucumbers, corn, green bell pepper, green and purple chillis, spring onions and broccoli.",
   },
   {
     title: "TenHag the man!",
@@ -429,5 +492,6 @@ module.exports = [
     votes: 0,
     article_img_url:
       "https://images.pexels.com/photos/774321/pexels-photo-774321.jpeg?w=700&h=700",
+    alt_img: "Close up of a black football boot with a white Nike logo tick.",
   },
 ];

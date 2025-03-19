@@ -63,6 +63,10 @@
       "article_id": 2
     }
   },
+  "POST /apiarticle/:article_id": {
+    "description": "Increase vote count by one on an article ",
+    "queries": []
+  },
   "PATCH /api/articles/:article_id": {
     "description": "Updates the vote count on an article, can be increased and decreased ",
     "queries": [],
